@@ -1,0 +1,140 @@
+package com.example.calculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import java.util.regex.Pattern;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    Button btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnZero, btnDot, btnClear, btnEqual, btnAdd, btnSub, btnMul, btnDiv;
+    TextView textResult;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        btnOne = (Button) findViewById(R.id.button11);
+        btnOne.setOnClickListener(this);
+        btnTwo = (Button) findViewById(R.id.button17);
+        btnTwo.setOnClickListener(this);
+        btnThree = (Button) findViewById(R.id.button16);
+        btnThree.setOnClickListener(this);
+        btnFour = (Button) findViewById(R.id.button14);
+        btnFour.setOnClickListener(this);
+        btnFive = (Button) findViewById(R.id.button);
+        btnFive.setOnClickListener(this);
+        btnSix = (Button) findViewById(R.id.button2);
+        btnSix.setOnClickListener(this);
+        btnSeven = (Button) findViewById(R.id.button4);
+        btnSeven.setOnClickListener(this);
+        btnEight = (Button) findViewById(R.id.button6);
+        btnEight.setOnClickListener(this);
+        btnNine = (Button) findViewById(R.id.button9);
+        btnNine.setOnClickListener(this);
+        btnZero = (Button) findViewById(R.id.button13);
+        btnZero.setOnClickListener(this);
+        btnDot = (Button) findViewById(R.id.button10);
+        btnDot.setOnClickListener(this);
+        btnClear = (Button) findViewById(R.id.button7);
+        btnClear.setOnClickListener(this);
+        btnEqual = (Button) findViewById(R.id.button12);
+        btnEqual.setOnClickListener(this);
+        btnAdd = (Button) findViewById(R.id.button15);
+        btnAdd.setOnClickListener(this);
+        btnSub = (Button) findViewById(R.id.button5);
+        btnSub.setOnClickListener(this);
+        btnMul = (Button) findViewById(R.id.button8);
+        btnMul.setOnClickListener(this);
+        btnDiv = (Button) findViewById(R.id.button20);
+        btnDiv.setOnClickListener(this);
+        textResult = (TextView) findViewById(R.id.textView);
+        textResult.setText("");
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.equals(btnOne))
+            textResult.append("1");
+        if(v.equals(btnTwo))
+            textResult.append("2");
+        if(v.equals(btnThree))
+            textResult.append("3");
+        if(v.equals(btnFour))
+            textResult.append("4");
+        if(v.equals(btnFive))
+            textResult.append("5");
+        if(v.equals(btnSix))
+            textResult.append("6");
+        if(v.equals(btnSeven))
+            textResult.append("7");
+        if(v.equals(btnEight))
+            textResult.append("8");
+        if(v.equals(btnNine))
+            textResult.append("9");
+        if(v.equals(btnZero))
+            textResult.append("0");
+        if(v.equals(btnClear))
+            textResult.setText("");
+        if(v.equals(btnAdd))
+            textResult.append("+");
+        if(v.equals(btnSub))
+            textResult.append("-");
+        if(v.equals(btnMul))
+            textResult.append("*");
+        if(v.equals(btnDiv))
+            textResult.append("/");
+        if(v.equals(btnEqual)){
+            try{
+                String data = textResult.getText().toString();
+                if(data.contains("/")) {
+                    String[] operands = data.split(Pattern.quote("/"));
+                    if (operands.length == 2) {
+                        double operand1 = Double.parseDouble(operands[0]);
+                        double operand2 = Double.parseDouble(operands[1]);
+                        double result = operand1 / operand2;
+                        textResult.setText(String.valueOf(result));
+                    } else
+                        Toast.makeText(getBaseContext(), "Invalid Input", Toast.LENGTH_LONG).show();
+                }
+                if(data.contains("*")) {
+                    String[] operands = data.split(Pattern.quote("*"));
+                    if (operands.length == 2) {
+                        double operand1 = Double.parseDouble(operands[0]);
+                        double operand2 = Double.parseDouble(operands[1]);
+                        double result = operand1 * operand2;
+                        textResult.setText(String.valueOf(result));
+                    } else
+                        Toast.makeText(getBaseContext(), "Invalid Input", Toast.LENGTH_LONG).show();
+                }
+                if(data.contains("+")) {
+                    String[] operands = data.split(Pattern.quote("+"));
+                    if (operands.length == 2) {
+                        double operand1 = Double.parseDouble(operands[0]);
+                        double operand2 = Double.parseDouble(operands[1]);
+                        double result = operand1 + operand2;
+                        textResult.setText(String.valueOf(result));
+                    } else
+                        Toast.makeText(getBaseContext(), "Invalid Input", Toast.LENGTH_LONG).show();
+                }
+                if(data.contains("-")) {
+                    String[] operands = data.split(Pattern.quote("-"));
+                    if (operands.length == 2) {
+                        double operand1 = Double.parseDouble(operands[0]);
+                        double operand2 = Double.parseDouble(operands[1]);
+                        double result = operand1 - operand2;
+                        textResult.setText(String.valueOf(result));
+                    } else
+                        Toast.makeText(getBaseContext(), "Invalid Input", Toast.LENGTH_LONG).show();
+                }
+                }
+            catch(Exception e){
+                Toast.makeText(getBaseContext(), "Invalid Input", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+}
